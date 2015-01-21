@@ -3,10 +3,24 @@
 #See the README.md for an explanation of the script and CodeBook.md for a description of the variables, the data, and all
 #transformations and work performed to clean up the data.
 
+#SETUP ENVIRONMENT
+        install.packages("RCurl")
+        install.packages("reshape2")
+        install.packages("plyr")
+        install.packages("data.table")
+
+        library(RCurl)
+        library(reshape2)
+        library(plyr)
+        library(data.table)
+        
+        setwd("/Users/wendy/Coursera/GetCleanData/Final Project")
+
 #CLEAN DATA
       
         #1a - Download and unzip zip file
                 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+                download.file(url, destfile = "./HARData.zip", method = "curl")
                 unzip("HARData.zip", overwrite = TRUE, exdir = "Data")
 
         #1b - Import Data
@@ -86,4 +100,4 @@
                 x <- melt(all.data, c("Subject","Activity"))
                 TidyData <- dcast(x, Subject + Activity ~ variable, mean)
                 print("Tidied AllData")
-                write.table(TidyData, file ="TidyData.txt", sep = ",", col.names = NA, qmethod = "double", row.name=FALSE)
+                write.table(TidyData, file ="TidyData.txt", sep = ",", qmethod = "double", row.name=FALSE)
