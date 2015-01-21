@@ -1,4 +1,8 @@
-#run_analysis prepares a tidy data set from Source Data.
+# Wendy Drake
+# 20 January 2015
+# Boulder, Colorado
+
+#run_analysis.r prepares a tidy data set from Source Data.
 #It is 1 of 3 files required to complete the final project for Coursera class "Getting and Cleaning Data."
 #See the README.md for an explanation of the script and CodeBook.md for a description of the variables, the data, and all
 #transformations and work performed to clean up the data.
@@ -16,8 +20,7 @@
         
         setwd("/Users/wendy/Coursera/GetCleanData/Final Project")
 
-#CLEAN DATA
-      
+#CLEAN DATA     
         #1a - Download and unzip zip file
                 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
                 download.file(url, destfile = "./HARData.zip", method = "curl")
@@ -96,7 +99,7 @@
                 #Housecleaning
                 rm(x.test,x.train,y.test,y.train,subject.test,subject.train,features,activity.labels, Features2Extract, test.data, training.data)
         
- #STEP 2 -  Tidy the dataset and export.
+ #TIDY THE DATASET & EXPORT.
                 x <- melt(all.data, c("Subject","Activity"))
                 TidyData <- dcast(x, Subject + Activity ~ variable, mean)
                 print("Tidied AllData")
